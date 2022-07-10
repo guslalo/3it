@@ -1,0 +1,89 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h6 class="mt-3 float-end">
+                <a href="javascript:;" onclick="window.history.go(-1)">
+                    <i class="bi bi-arrow-left-square-fill"></i>
+                    Volver
+                </a>
+            </h6>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h5 class="mt-3 mb-3">
+                Resultados <b class="uppercase">{{valueType}}</b> :
+            </h5>
+        </div>
+    </div>
+</div>
+
+<div class="container" *ngIf="loaded">
+    <div class="row">
+        <div class="col-12 mt-5 pt-5">
+            <div class="text-center">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--lista-->
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <ul class="list-group list-group-flush lista">
+                <ng-container *ngFor="let item of values">
+                    <li class="list-group-item"  data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="openModal(item)">
+                        Fecha: {{item.Fecha | date: 'dd/MM/yyyy'}} 
+                        <span class="float-end d-block"> Valor: <b>{{item.Valor}}</b> <i class="bi bi-arrow-right-square ml-4"></i></span>
+                    </li>
+                </ng-container>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--lista-->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detalle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <h1>Valor: <b>{{object.Valor}}</b></h1> 
+            <ul class="list-group list-group-flush mb-4">
+                <li class="list-group-item">Tipo: {{valueType}}</li>
+                <li class="list-group-item">Fecha: {{object.Fecha | date: 'dd/MM/yyyy'}}</li>
+            </ul>
+                <!--Chart-->
+                <div style="display: block;">
+                    <div class="text-center" *ngIf="loaderChart">
+                        <div class="spinner-border text-primary mt-4" role="status">
+                            <span class="sr-only"></span>
+                        </div>
+                    </div>
+                    <canvas  *ngIf="!loaderChart" baseChart width="400" height="400"
+                        [type]="'line'"
+                        [data]="lineChartData"
+                        [options]="lineChartOptions"
+                        [legend]="lineChartLegend">
+                    </canvas>
+                </div> <!--/Chart-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->

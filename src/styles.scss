@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+@import '~bootstrap/scss/bootstrap';
+
+a:link {text-decoration:none}
+a:visited {text-decoration:none}
+a:hover {text-decoration:underline}
+a:active {text-decoration:none}
+
+.lista {
+    li {
+        cursor: pointer;
+    }
+    i {
+        margin-left: 15px;
+    }
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+
